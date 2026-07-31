@@ -1,0 +1,46 @@
+CREATE TABLE users (
+  user_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  phone VARCHAR(15),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE items (
+  item_id INT AUTO_INCREMENT PRIMARY KEY,
+  owner_id INT NOT NULL,
+  name VARCHAR(150) NOT NULL,
+  description TEXT,
+  category VARCHAR(50),
+  image_url VARCHAR(255),
+  price_per_hour DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  availability BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (owner_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE borrow_requests (
+  request_id INT AUTO_INCREMENT PRIMARY KEY,
+  item_id INT NOT NULL,
+  borrower_id INT NOT NULL,
+  owner_id INT NOT NULL,
+  hours_requested INT NOT NULL,
+  total_price DECIMAL(10,2) NOT NULL,
+  status ENUM('PENDING','APPROVED','BORROWED','RETURNED','REJECTED') DEFAULT 'PENDING',
+  request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  return_date TIMESTAMP NULL,
+  FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
+  FOREIGN KEY (borrower_id) REFERENCES users(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (owner_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE notifications (
+  notification_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  message VARCHAR(255) NOT NULL,
+  type VARCHAR(50),
+  is_read BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
