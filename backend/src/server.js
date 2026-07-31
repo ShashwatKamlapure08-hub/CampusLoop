@@ -2,10 +2,12 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const pool = require('./db');
+const usersRoute = require('./routes/users');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api/users', usersRoute);
 
 app.get('/', (req, res) => {
   res.json({ message: 'CampusLoop server is running' });
