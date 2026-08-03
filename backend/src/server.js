@@ -5,6 +5,7 @@ const pool = require('./db');
 const usersRoute = require('./routes/users');
 const itemsRoute = require('./routes/items');
 const borrowRequestsRoute = require('./routes/borrowRequests');
+const notificationsRoute = require('./routes/notifications');
 
 const app = express();
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use('/api/users', usersRoute);
 app.use('/api/items', itemsRoute);
 app.use('/api/borrow-requests', borrowRequestsRoute);
+app.use('/api/notifications', notificationsRoute);
 
 app.get('/', (req, res) => {
   res.json({ message: 'CampusLoop server is running' });

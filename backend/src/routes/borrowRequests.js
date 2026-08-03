@@ -39,6 +39,12 @@ router.post('/', authMiddleware, async (req, res) => {
       [item_id, borrower_id, item.owner_id, hours_requested, total_price]
     );
 
+    // Notify the owner
+    await pool.query(
+      `INSERT INTO notifications (user_id, message, type) VALUES (?, ?, ?)`,
+      [item.owner_id, `${req.user.email} requested to borrow your item (Item ID: ${item_id})`, 'BORROW_REQUEST']
+    );
+
     res.status(201).json({
       message: 'Borrow request sent',
       request_id: result.insertId,
@@ -112,6 +118,12 @@ router.put('/:request_id/status', authMiddleware, async (req, res) => {
     if (status === 'APPROVED') {
       await pool.query('UPDATE items SET availability = FALSE WHERE item_id = ?', [requests[0].item_id]);
     }
+    
+    // Notify the borrower
+    await pool.query(
+      `INSERT INTO notifications (user_id, message, type) VALUES (?, ?, ?)`,
+      [requests[0].borrower_id, `Your borrow request (ID: ${request_id}) was ${status.toLowerCase()}`, 'REQUEST_STATUS']
+    );
 
     res.json({ message: `Request ${status.toLowerCase()}` });
   } catch (err) {
@@ -149,6 +161,12 @@ router.put('/:request_id/return', authMiddleware, async (req, res) => {
     );
 
     await pool.query('UPDATE items SET availability = TRUE WHERE item_id = ?', [request.item_id]);
+
+    // Notify the owner that the item was returned
+    await pool.query(
+      `INSERT INTO notifications (user_id, message, type) VALUES (?, ?, ?)`,
+      [request.owner_id, `Your item (Request ID: ${request_id}) has been marked as returned`, 'ITEM_RETURNED']
+    );
 
     res.json({ message: 'Item marked as returned' });
   } catch (err) {
