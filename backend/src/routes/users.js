@@ -14,6 +14,14 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'Name, email, and password are required' });
     }
 
+    // Domain restriction — only allow official college emails
+    const allowedDomain = process.env.ALLOWED_EMAIL_DOMAIN;
+    if (!email.toLowerCase().endsWith(allowedDomain.toLowerCase())) {
+      return res.status(400).json({
+        error: `Only college emails ending in ${allowedDomain} are allowed`
+      });
+    }
+
     // Check if user already exists
     const [existing] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
     if (existing.length > 0) {
