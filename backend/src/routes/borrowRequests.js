@@ -119,4 +119,41 @@ router.put('/:request_id/status', authMiddleware, async (req, res) => {
   }
 });
 
+// MARK AS RETURNED (borrower or owner can confirm)
+router.put('/:request_id/return', authMiddleware, async (req, res) => {
+  try {
+    const { request_id } = req.params;
+    const user_id = req.user.user_id;
+
+    const [requests] = await pool.query(
+      'SELECT * FROM borrow_requests WHERE request_id = ?',
+      [request_id]
+    );
+    if (requests.length === 0) {
+      return res.status(404).json({ error: 'Request not found' });
+    }
+
+    const request = requests[0];
+
+    if (request.borrower_id !== user_id && request.owner_id !== user_id) {
+      return res.status(403).json({ error: 'Not authorized to update this request' });
+    }
+
+    if (request.status !== 'APPROVED') {
+      return res.status(400).json({ error: `Cannot return a request with status ${request.status}` });
+    }
+
+    await pool.query(
+      `UPDATE borrow_requests SET status = 'RETURNED', return_date = NOW() WHERE request_id = ?`,
+      [request_id]
+    );
+
+    await pool.query('UPDATE items SET availability = TRUE WHERE item_id = ?', [request.item_id]);
+
+    res.json({ message: 'Item marked as returned' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
