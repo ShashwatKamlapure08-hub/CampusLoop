@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Auth pages (login / register)
+   The card reads like a library checkout slip: a torn/perforated top edge,
+   a monospace "tag" line, and a stamp-style badge — tying the visual to the
+   product's core idea (borrowing & returning items).
+   ========================================================================== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(51, 68, 140, 0.06), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(242, 167, 59, 0.08), transparent 40%),
+    var(--bg);
+}
+
+.auth-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.auth-brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.auth-brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--ink);
+}
+
+/* The checkout-slip card */
+.auth-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--primary-tint);
+  border-bottom: 1px dashed #C4CBE8;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--primary-dark);
+  letter-spacing: 0.03em;
+}
+
+.auth-card-tag .stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--accent);
+  color: #4A2E00;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.auth-card-body {
+  padding: 28px 24px 26px;
+}
+
+.auth-heading {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.auth-subheading {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+  display: block;
+}
+
+.auth-footer-link {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-top: 18px;
+}
+
+.auth-footer-link a { font-weight: 600; }
+
+.auth-legal {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* Perforation dots along the bottom of the tag strip, like a tear line */
+.auth-card-tag::after {
+  content: "";
+}

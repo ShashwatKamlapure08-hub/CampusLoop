@@ -1,0 +1,131 @@
+/* ==========================================================================
+   My Requests page
+   ========================================================================== */
+
+.browse-state {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 14px;
+}
+
+.requests-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--primary-tint);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.requests-tab {
+  border: none;
+  background: transparent;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+.requests-tab.active {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(28, 35, 51, 0.08);
+}
+
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.request-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.request-main {
+  flex: 1;
+  min-width: 220px;
+}
+
+.request-item-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.request-meta {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.request-meta .divider {
+  color: var(--border);
+}
+
+.request-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-badge.status-pending {
+  background: #FDF1DC;
+  color: var(--accent-dark);
+}
+.status-badge.status-approved {
+  background: var(--primary-tint);
+  color: var(--primary-dark);
+}
+.status-badge.status-rejected {
+  background: var(--danger-tint);
+  color: var(--danger);
+}
+.status-badge.status-returned {
+  background: var(--success-tint);
+  color: var(--success);
+}
+
+.request-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.request-actions .btn {
+  width: auto;
+  padding: 8px 14px;
+  font-size: 12.5px;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+.btn-danger:hover { background: #B93838; }

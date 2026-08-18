@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Requests — CampusLoop</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/requests.css" />
+</head>
+<body>
+  <header id="app-nav"></header>
+
+  <main class="app-main">
+    <div class="page-header">
+      <div>
+        <h1>My Requests</h1>
+        <p class="page-subtitle">Track items you've asked to borrow, and requests on your listings.</p>
+      </div>
+    </div>
+
+    <div class="requests-tabs">
+      <button type="button" id="tab-received-btn" class="requests-tab active">Received</button>
+      <button type="button" id="tab-sent-btn" class="requests-tab">Sent</button>
+    </div>
+
+    <div id="requests-banner" class="banner" role="alert"></div>
+
+    <div id="requests-loading" class="browse-state">Loading requests…</div>
+    <div id="requests-empty" class="browse-state" style="display:none;"></div>
+
+    <div id="requests-list" class="requests-list"></div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/my-requests.js"></script>
+</body>
+</html>
