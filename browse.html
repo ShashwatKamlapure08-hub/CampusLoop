@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browse Items — CampusLoop</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/browse.css" />
+</head>
+<body>
+  <header id="app-nav"></header>
+
+  <main class="app-main">
+    <div class="page-header">
+      <div>
+        <h1>Browse Items</h1>
+        <p class="page-subtitle">Find something to borrow from fellow students.</p>
+      </div>
+      <div class="browse-search">
+        <input
+          type="text"
+          id="browse-search-input"
+          placeholder="Search by name or category…"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <div id="browse-banner" class="banner" role="alert"></div>
+
+    <div id="browse-loading" class="browse-state">Loading items…</div>
+    <div id="browse-empty" class="browse-state" style="display:none;">
+      No items available right now. Check back later, or list one yourself.
+    </div>
+
+    <div id="browse-grid" class="browse-grid"></div>
+  </main>
+
+  <!-- Borrow modal -->
+  <div id="borrow-modal-overlay" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-card-tag">
+        <span>ISSUE&nbsp;&nbsp;LOAN</span>
+        <span class="stamp">CAMPUS ID</span>
+      </div>
+      <div class="modal-card-body">
+        <h2 id="borrow-modal-title" class="modal-heading">Borrow item</h2>
+        <p id="borrow-modal-owner" class="modal-subtext"></p>
+
+        <div id="borrow-modal-banner" class="banner" role="alert"></div>
+
+        <div class="field">
+          <label for="borrow-hours-input">Hours needed</label>
+          <input type="number" id="borrow-hours-input" min="1" step="1" value="1" />
+        </div>
+
+        <div class="borrow-price-row">
+          <span>Estimated price</span>
+          <span id="borrow-price-value" class="borrow-price-value">—</span>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="borrow-cancel-btn" class="btn btn-ghost">Cancel</button>
+          <button type="button" id="borrow-confirm-btn" class="btn btn-primary">Send request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/browse.js"></script>
+</body>
+</html>
