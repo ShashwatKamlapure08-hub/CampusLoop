@@ -31,9 +31,13 @@ function clearSession() {
   localStorage.removeItem("campusloop_user");
 }
 
-// If already logged in, auth pages should bounce straight to Browse.
 function redirectIfLoggedIn() {
-  if (getToken()) {
+  const isLoginPage = document.getElementById("login-form");
+  const isRegisterPage = document.getElementById("register-form");
+
+  // Only redirect from login/register pages.
+  // Do NOT redirect from browse.html or other authenticated pages.
+  if ((isLoginPage || isRegisterPage) && getToken()) {
     window.location.href = "browse.html";
   }
 }
@@ -152,17 +156,7 @@ function initRegisterForm() {
 // Init
 // ---------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // Only auto-redirect away from the login/register pages themselves.
-  // auth.js is loaded on every page (browse, my-items, etc. all need
-  // getToken/getCurrentUser/clearSession), so this must NOT run globally —
-  // otherwise an already-logged-in user on browse.html would be redirected
-  // to browse.html, which browsers treat as a real reload, causing an
-  // infinite reload loop.
-  const isAuthPage = document.getElementById("login-form") || document.getElementById("register-form");
-  if (isAuthPage) {
-    redirectIfLoggedIn();
-  }
-
+  redirectIfLoggedIn();
   initLoginForm();
   initRegisterForm();
 

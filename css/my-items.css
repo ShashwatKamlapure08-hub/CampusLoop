@@ -1,0 +1,68 @@
+/* ==========================================================================
+   My Listed Items page
+   ========================================================================== */
+
+.items-add-btn {
+  width: auto;
+  padding: 10px 18px;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+/* ---------- Item status badge (owner's own view) ---------- */
+.item-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.item-status-badge.status-available {
+  background: var(--success-tint);
+  color: var(--success);
+}
+.item-status-badge.status-borrowed {
+  background: #FDF1DC;
+  color: var(--accent-dark);
+}
+
+/* ---------- List item modal ---------- */
+.list-item-modal-card {
+  max-width: 440px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field-optional {
+  font-weight: 400;
+  color: var(--ink-faint);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.field textarea {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: inherit;
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-tint);
+  outline: none;
+}
+.field textarea::placeholder { color: var(--ink-faint); }
