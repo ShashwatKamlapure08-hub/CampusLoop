@@ -30,9 +30,16 @@ async function loadItems() {
   hideBanner(bannerEl);
 
   try {
-    const items = await apiFetch("/items");
-    allItems = Array.isArray(items) ? items : [];
-    renderItems(allItems);
+  const res = await fetch(`${API_BASE_URL}/items`);
+
+  if (!res.ok) {
+    throw new Error(`Failed to load items (${res.status})`);
+  }
+
+  const items = await res.json();
+
+  allItems = Array.isArray(items) ? items : [];
+  renderItems(allItems);
   } catch (err) {
     showBanner(bannerEl, err.message || "Couldn't load items.", "error");
   } finally {

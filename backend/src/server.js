@@ -25,7 +25,14 @@ app.get('/api/test-db', async (req, res) => {
     const [rows] = await pool.query('SHOW TABLES;');
     res.json({ connected: true, tables: rows });
   } catch (err) {
-    res.status(500).json({ connected: false, error: err.message });
+    console.error("DATABASE TEST ERROR:", err);
+
+    res.status(500).json({
+        connected: false,
+        error: err.message || String(err),
+        code: err.code || null,
+        errno: err.errno || null
+    });
   }
 });
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Listed Items — CampusLoop</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/browse.css" />
+  <link rel="stylesheet" href="css/my-items.css" />
+</head>
+<body>
+  <header id="app-nav"></header>
+
+  <main class="app-main">
+    <div class="page-header">
+      <div>
+        <h1>My Listed Items</h1>
+        <p class="page-subtitle">Items you've made available for other students to borrow.</p>
+      </div>
+      <button type="button" id="open-list-item-btn" class="btn btn-primary items-add-btn">+ List new item</button>
+    </div>
+
+    <div id="items-banner" class="banner" role="alert"></div>
+
+    <div id="items-loading" class="browse-state">Loading your items…</div>
+    <div id="items-empty" class="browse-state" style="display:none;">
+      You haven't listed anything yet. Click "List new item" to get started.
+    </div>
+
+    <div id="items-grid" class="browse-grid"></div>
+  </main>
+
+  <!-- List new item modal -->
+  <div id="list-item-modal-overlay" class="modal-overlay" style="display:none;">
+    <div class="modal-card list-item-modal-card">
+      <div class="modal-card-tag">
+        <span>ISSUE&nbsp;&nbsp;NEW&nbsp;LISTING</span>
+        <span class="stamp">CAMPUS ID</span>
+      </div>
+      <div class="modal-card-body">
+        <h2 class="modal-heading">List a new item</h2>
+        <p class="modal-subtext">Fellow students will see this in Browse Items once submitted.</p>
+
+        <div id="list-item-banner" class="banner" role="alert"></div>
+
+        <form id="list-item-form" novalidate>
+          <div class="field">
+            <label for="item-name-input">Item name</label>
+            <input type="text" id="item-name-input" placeholder="e.g. Scientific Calculator" required />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="item-category-input">Category</label>
+              <input type="text" id="item-category-input" placeholder="e.g. Electronics" />
+            </div>
+            <div class="field">
+              <label for="item-price-input">Price per hour (₹)</label>
+              <input type="number" id="item-price-input" min="0" step="0.5" placeholder="5" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="item-description-input">Description</label>
+            <textarea id="item-description-input" rows="3" placeholder="Condition, model, anything a borrower should know…"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="item-image-input">Image URL <span class="field-optional">(optional)</span></label>
+            <input type="text" id="item-image-input" placeholder="https://…" />
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" id="list-item-cancel-btn" class="btn btn-ghost">Cancel</button>
+            <button type="submit" id="list-item-submit-btn" class="btn btn-primary">List item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/my-items.js"></script>
+</body>
+</html>

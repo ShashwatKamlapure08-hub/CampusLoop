@@ -26,6 +26,20 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
+// MY LISTED ITEMS (protected — regardless of availability)
+router.get('/mine', authMiddleware, async (req, res) => {
+  try {
+    const owner_id = req.user.user_id;
+    const [items] = await pool.query(
+      `SELECT * FROM items WHERE owner_id = ? ORDER BY created_at DESC`,
+      [owner_id]
+    );
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // BROWSE ALL AVAILABLE ITEMS (public)
 router.get('/', async (req, res) => {
   try {
