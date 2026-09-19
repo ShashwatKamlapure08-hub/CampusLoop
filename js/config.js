@@ -4,4 +4,4 @@
 // DNS / domain name later once deployed. Every other JS file imports this.
 // ==========================================================================
 
-const API_BASE_URL = "http://localhost:5550/api";
+const API_BASE_URL = "https://13.60.16.56.nip.io/api";
